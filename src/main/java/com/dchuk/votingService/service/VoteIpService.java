@@ -7,6 +7,10 @@ import org.springframework.stereotype.Service;
 @Service
 public class VoteIpService {
 
+
+    // --------------------------------------------
+    // CRUD OPERATIONS FOR RECORDS (VoteId)
+
     @Autowired
     VoteIpRepository voteIpRepository;
 
