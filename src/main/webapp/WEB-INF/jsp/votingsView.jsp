@@ -16,6 +16,7 @@
             </style>
 </head>
 <body>
+<div class="container">
 <table id="voting" class="table">
     <thead>
     <th>#</th>
@@ -29,14 +30,14 @@
         <th>${voting.name}</th>
         <c:choose>
             <c:when test ="${voting.status == 'isVoting'}">
-        <th><button id="stop${voting.votingId}" onclick="stop(${voting.votingId})">Stop</button>
-        <a href="/poll/${voting.votingId}" ><input type="button" value="Vote"  id="vote"></a>
+        <th><button id="stop${voting.votingId}" class="btn btn-primary" onclick="stop(${voting.votingId})">Stop</button>
+        <a href="/poll/${voting.votingId}" ><input class="btn btn-success" type="button" value="Vote"  id="vote"></a>
             </c:when>
             <c:when test ="${voting.status == 'isClosed'}">
-        <th><a href="/poll/${voting.votingId}/statistic" ><input type="button" value="Statistic" ></a>
+        <th><a href="/poll/${voting.votingId}/statistic" ><input class="btn btn-success" type="button" value="Statistic" ></a>
             </c:when>
             <c:when test ="${voting.status == 'isNotStarted'}">
-        <th><a href="/poll/${voting.votingId}" ><input type="button" value="Start" ></a>
+        <th><a href="/poll/${voting.votingId}" ><input class="btn btn-primary" type="button" value="Start" ></a>
             </c:when>
         </c:choose>
 
@@ -65,13 +66,21 @@
         var optionsCount;
         $('#openModal').click(function(event) {
             $('#name').val("");
-            $('#description').val("")
-            var div = document.getElementById("options");
-            div.innerHTML = "<div>" +
-                "                        <input type = radio disabled>" +
-                "                        <input id=\"option1\" type=\"text\" placeholder=\"Option1\">" +
-                "                        </div>"
+            $('#description').val("");
             optionsCount = 1;
+            var radio = document.createElement("input");
+            radio.type = "radio";
+            radio.disabled = true;
+            var option = document.createElement("input");
+            option.type = "text";
+            option.placeholder = "Option" + optionsCount;
+            option.id = "option" + optionsCount;
+            var div1 = document.createElement("div");
+            div1.class = "row";
+            var div = document.getElementById("options");
+            div1.appendChild(radio);
+            div1.appendChild(option);
+            div.appendChild(div1);
         });
     </script>
     <div id="dialog" class="modal fade" role="dialog" title="Dialog box">
@@ -89,7 +98,7 @@
                     <h3 for="description">Description:</h3>
                     <br><textarea id="description" rows="4" cols="50"></textarea><br>
                     <h3>Options:</h3><br>
-                    <div id = "options">
+                    <div id = "options" class="container">
                     </div><br>
                     <button type="button" class="btn btn-primary" id="addOption" >AddNewOption</button>
                     <script>
@@ -103,6 +112,7 @@
                            option.placeholder = "Option" + optionsCount;
                            option.id = "option" + optionsCount;
                            var div1 = document.createElement("div");
+                           div1.class = "row";
                            var div = document.getElementById("options");
                            div1.appendChild(radio);
                            div1.appendChild(option);
@@ -148,6 +158,7 @@
                                     var input = document.createElement("input");
                                     input.type = "button";
                                     input.value = "Start";
+                                    input.className = "btn btn-primary";
                                     a.appendChild(input);
                                     th3.appendChild(a);
                                     tr.appendChild(th1);
@@ -168,7 +179,7 @@
         </div>
     </div>
 </form>
-
+</div>
 
 </body>
 
